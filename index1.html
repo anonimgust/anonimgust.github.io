@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Document</title>
+	<style type="text/css">
+		.topnav a{
+			color: #000;
+			text-align: center;
+			padding: 14px 16px;
+			font-size: 15px;
+		}
+		.topnav a:hover{
+			border-bottom: 2px solid #000;
+		}
+	</style>
+</head>
+<body style="margin: 0;">
+		<nav>
+			<div class="topnav" id="myTopnav">
+				<a href="index.html">HOME</a>
+			</div>
+		</nav>
+	<canvas id="canvas" style="display: block;">Eror</canvas>
+	<script>
+		var
+			canv = document.getElementById('canvas'),
+			ctx = canv.getContext('2d'),
+			isMouseDown = false;
+
+		canv.width = window.innerWidth;
+		canv.height = window.innerHeight;
+		//Code
+		canv.addEventListener('mousedown', function(){
+			isMouseDown = true;
+		});
+		canv.addEventListener('mouseup', function(){
+			isMouseDown = false;
+			ctx.beginPath();
+		});
+		ctx.lineWidth = 10*2;
+		canv.addEventListener('mousemove', function(e){
+			if (isMouseDown) {
+				ctx.lineTo(e.clientX, e.clientY);
+				ctx.stroke();
+				ctx.beginPath();
+				ctx.arc(e.clientX, e.clientY, 10, 0, Math.PI * 2);
+				ctx.fill();
+				ctx.beginPath();
+				ctx.moveTo(e.clientX, e.clientY);
+
+			}
+
+		} );
+
+	</script>
+</body>
+</html>
